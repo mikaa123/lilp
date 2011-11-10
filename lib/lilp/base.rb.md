@@ -26,10 +26,10 @@ _Literate Render_
 
 Let's define here our render. It is a class that inherite from Redcarpet::Render::Base
 	
-	```ruby
+	~~~~~~ ruby
 	class LiterateRender < Redcarpet::Render::Base
 		COMMENT_SIGN = "#  "
-	```
+ 	~~~~~~
 	
 Now, redcarpet's parser will call a number of hook, depending on what has been found
 in the given lilp file. These hooks can be either `header`, `paragraph`, `block_code`
