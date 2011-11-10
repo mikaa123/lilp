@@ -25,14 +25,17 @@ is to specify a valid 'render' object, and make it output a program. Let's do th
 _Literate Render_
 
 Let's define here our render. It is a class that inherite from Redcarpet::Render::Base
-
+	
+	```ruby
 	class LiterateRender < Redcarpet::Render::Base
 		COMMENT_SIGN = "#  "
+	```
 	
 Now, redcarpet's parser will call a number of hook, depending on what has been found
 in the given lilp file. These hooks can be either `header`, `paragraph`, `block_code`
 or other. Here is the formal specification: 
   
+		```ruby
 	  def preprocess(full_document)
 	    @macro = {}
 	    full_document
@@ -69,6 +72,7 @@ or other. Here is the formal specification:
 	  end
 
 	end
+	```
 	
 The code above lists all the rules our render will live by. If there is anything to
 change in our render, it's in this part of the code.
@@ -88,6 +92,7 @@ API.
 * * *
 _The option parser_
 
+	```ruby
 	class Option
 	  attr_reader :files, :params
   
@@ -119,6 +124,7 @@ _The option parser_
 	    end
 	  end
 	end
+	```
 
 * * *
 
@@ -134,6 +140,7 @@ the command line.
 * * *
 _Runner class_
 
+	```ruby
 	class Runner
   
 	  def run( params, files_path )
@@ -181,16 +188,21 @@ _Runner class_
 
 	  end
 	end
+	```
 
 * * *
 
 Now, the last thing we need to do is to attach each of the parts in the correct order, under
 the Lilp module.
 
+	```ruby
 	module Lilp
+	```
 
 ### Call: The option parser ###
 ### Call: Literate Render ###
 ### Call: Runner class ###
 
+	```ruby
 	end
+	```
