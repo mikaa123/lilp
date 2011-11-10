@@ -106,7 +106,7 @@
 #  class Runner
 #  
 #    def run( params, files_path )
-#      lilp_parser = Redcarpet::Markdown.new(LiterateRender)
+#      lilp_parser = Redcarpet::Markdown.new(LiterateRender, :fenced_code_blocks => true)
 #  
 #      files_path.each do |file_path|
 #        puts "#{file_path}: "
@@ -230,7 +230,7 @@ end
 class Runner
 
   def run( params, files_path )
-    lilp_parser = Redcarpet::Markdown.new(LiterateRender)
+    lilp_parser = Redcarpet::Markdown.new(LiterateRender, :fenced_code_blocks => true)
 
     files_path.each do |file_path|
       puts "#{file_path}: "
