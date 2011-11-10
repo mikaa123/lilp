@@ -5,7 +5,7 @@
 #  I propose we dive directly into the subject's by specifying how to parse and render source
 #  code from lilp files. After that, we'll see how to handle option parsing for our command
 #  line application. And lastly, we'll tie everything together.
-#  lilp files are simply files that end with a 'lp' extension. They are valid markdown files.
+#  lilp files are simply files that end with a 'md' extension. They are valid markdown files.
 #  In order to simplify the parsing phase, I am using the `redcarpet` library. This library
 #  is easy to extend.
 #  What we want to do is to create a 'render'. A render is an object that outputs a stream.
@@ -111,7 +111,7 @@
 #      files_path.each do |file_path|
 #        puts "#{file_path}: "
 #  
-#        if File.extname( file_path ) != '.lp'
+#        if File.extname( file_path ) != '.md'
 #          puts 'Skipping (file must have a .lp extension)'
 #          next
 #        end
@@ -235,7 +235,7 @@ class Runner
     files_path.each do |file_path|
       puts "#{file_path}: "
 
-      if File.extname( file_path ) != '.lp'
+      if File.extname( file_path ) != '.md'
         puts 'Skipping (file must have a .lp extension)'
         next
       end

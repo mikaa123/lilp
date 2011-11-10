@@ -13,7 +13,7 @@ line application. And lastly, we'll tie everything together.
 
 ## Parsing and rendering a lilp file ##
 
-lilp files are simply files that end with a 'lp' extension. They are valid markdown files.
+lilp files are simply files that end with a 'md' extension. They are valid markdown files.
 In order to simplify the parsing phase, I am using the `redcarpet` library. This library
 is easy to extend.
 
@@ -142,7 +142,7 @@ _Runner class_
 	    files_path.each do |file_path|
 	      puts "#{file_path}: "
       
-	      if File.extname( file_path ) != '.lp'
+	      if File.extname( file_path ) != '.md'
 	        puts 'Skipping (file must have a .lp extension)'
 	        next
 	      end
