@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require 'lilp'
+
+options = Lilp::Option.new( ARGV.dup )
+options.parse
+
+runner  = Lilp::Runner.new
+runner.run( options.params, options.files )
