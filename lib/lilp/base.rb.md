@@ -12,7 +12,7 @@ I propose we dive directly into the subject's by
 After that, we'll see [how to handle option parsing](#step2) for our
 command line application. And lastly, we'll [tie everything together](step3).
 
-## Parsing and rendering a lilp file ## <a id="step1"/>
+## Parsing and rendering a lilp file <a id="step1"/>
 
 lilp files are simply files that end with a 'md' extension. They are valid markdown files.
 In order to simplify the parsing phase, I am using the `redcarpet` library. This library
@@ -80,7 +80,7 @@ change in our render, it's in this part of the code.
 
 * * *
 
-## Handle command line options ## <a id="step2"/>
+## Handle command line options <a id="step2"/>
 
 To a regular user, lilp is only a command he can invoke from the terminal. In order
 to work with it, we need to get some information from the user, such as the files
@@ -129,7 +129,7 @@ end
 
 * * *
 
-## Put everything together ## <a id="step3"/>
+## Put everything together <a id="step3"/>
 
 We have a lilp render class, an option class that takes care of the command line
 options, now we need a way to tie the to together.
