@@ -7,11 +7,12 @@ using Markdown. In its current state, it is mainly an experiment, a toy.
 This file is the main program file of the lilp application. Here is how we are going to
 decompose it.
 
-I propose we dive directly into the subject's by specifying how to parse and render source
-code from lilp files. After that, we'll see how to handle option parsing for our command
-line application. And lastly, we'll tie everything together.
+I propose we dive directly into the subject's by
+ [specifying how to parse and render source code from lilp files](#step1).
+After that, we'll see [how to handle option parsing](#step2) for our
+command line application. And lastly, we'll [tie everything together](step3).
 
-## Parsing and rendering a lilp file ##
+## Parsing and rendering a lilp file ## <a id="step1"/>
 
 lilp files are simply files that end with a 'md' extension. They are valid markdown files.
 In order to simplify the parsing phase, I am using the `redcarpet` library. This library
@@ -25,16 +26,16 @@ is to specify a valid 'render' object, and make it output a program. Let's do th
 _Literate Render_
 
 Let's define here our render. It is a class that inherite from Redcarpet::Render::Base
-	
+
 ~~~~~~ ruby
 class LiterateRender < Redcarpet::Render::Base
 	COMMENT_SIGN = "#  "
 ~~~~~~
-	
+
 Now, redcarpet's parser will call a number of hook, depending on what has been found
 in the given lilp file. These hooks can be either `header`, `paragraph`, `block_code`
-or other. Here is the formal specification: 
-  
+or other. Here is the formal specification:
+
 ~~~~~~ ruby
   def preprocess(full_document)
     @macro = {}
@@ -73,13 +74,13 @@ or other. Here is the formal specification:
 
 end
 ~~~~~~
-	
+
 The code above lists all the rules our render will live by. If there is anything to
 change in our render, it's in this part of the code.
 
 * * *
 
-## Handle command line options ##
+## Handle command line options ## <a id="step2"/>
 
 To a regular user, lilp is only a command he can invoke from the terminal. In order
 to work with it, we need to get some information from the user, such as the files
@@ -100,7 +101,7 @@ class Option
     @params = {}
     @parser = OptionParser.new
     @args   = args
-  
+
     @parser.banner = "Usage: lilp file_name.pl [other_file.pl] [-o output_dir]"
     @parser.on("-o", "--output D", String, "Output directory") { |val| @params[:output] = File.join('.', "#{val}") }
   end
@@ -128,7 +129,7 @@ end
 
 * * *
 
-## Put everything together ##
+## Put everything together ## <a id="step3"/>
 
 We have a lilp render class, an option class that takes care of the command line
 options, now we need a way to tie the to together.
@@ -145,15 +146,15 @@ class Runner
 
   def run( params, files_path )
     lilp_parser = Redcarpet::Markdown.new(LiterateRender, :fenced_code_blocks => true)
-  
+
     files_path.each do |file_path|
       puts "#{file_path}: "
-    
+
       if File.extname( file_path ) != '.md'
         puts 'Skipping (file must have a .lp extension)'
         next
       end
-    
+
       output_path = String.new
       if params[:output]
         # Creates the output directory if it doesn't exist
@@ -163,24 +164,24 @@ class Runner
           puts "Creating folder #{params[:output]}"
           Dir.mkdir(params[:output])
         end
-      
+
         file_name   = File.basename(file_path).chomp( File.extname(file_path) )
         output_path = File.join(params[:output], file_name)
       else
         output_path = file_path.chomp( File.extname(file_path) )
       end
-    
+
       begin
         file = File.open( file_path, 'r' )
         out  = File.open( output_path, 'w' )
-      
+
         out.write( lilp_parser.render( file.read ) )
-      
+
         out.close
         file.close
-      
+
         puts "Wrote #{output_path}"
-      
+
       rescue
         puts "Error while parsing file '#{file_path}': #{$!}"
       end
