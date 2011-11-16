@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.homepage    = ""
   s.summary     = %q{Lilp is lightweight literate programming}
 
-  # s.add_development_dependency "watchr"
+  s.add_dependency 'redcarpet'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
