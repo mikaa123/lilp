@@ -15,7 +15,10 @@ module Lilp
         @params[:output] = File.join('.', "#{val}")
       end
 
-      @parser.on("-v", "--version", "Version number") { puts Lilp::VERSION }
+      @parser.on("-v", "--version", "Version number") do
+        puts "lilp version " + Lilp::VERSION
+        exit
+      end
     end
 
     def parse
