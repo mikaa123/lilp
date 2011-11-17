@@ -3,37 +3,22 @@ Lightweight Literate programming
 
 lilp is a preprocessor that allows you to write literate programming code using the Markdown syntax.
 
-It is an experiment and shouldn't be used for any serious matter.
+It is an experiment and shouldn't be used for any serious matter. Or
+should it?!
 
 ## How it works
 
 Simply write your source file as if you were writing a normal Markdown document.
 
 ~~~~ ruby
-puts "code blocks will be 'tangled' when the program is generated."
+puts "code inside code blocks will be extracted, while the rest will
+      be tranformed as comments"
 ~~~~
 
-It is possible to define macros like this:
-
-~~~~
-* * *
-_macro name_
-
-Any macro can have a textual description
-
-    puts "this is the macro's code"
-
-* * *
-~~~~
-
-It is then possible to call the macro anytime like that:
-
-~~~~
-### Call: macro name
-~~~~
+Everything but code blocks will be transformed as comments.
 
 # Compiling
-lilp comes with a binary file that takes as an input file names, and an "-o" option to specify an output directory.
+lilp comes with a command line tool that takes as an input file names, and a "-o" option to specify an output directory.
 
 If your files are under the `lib` directory, and you want to compile them into the `tangled` directory, then do:
 
