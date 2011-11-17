@@ -1,6 +1,6 @@
 #  To keep up with the version, we declare it as a constant under
 #  the Lilp module.
 module Lilp
-  VERSION = '0.1.1'
+  VERSION = '0.2.0'
 end
 
