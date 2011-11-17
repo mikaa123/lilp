@@ -15,26 +15,26 @@
 #  Let's define here our render. It is a class that inherite from Redcarpet::Render::Base
 #  class LiterateRender < Redcarpet::Render::Base
 #      COMMENT_SIGN = "#  "
-#  
+#
 #  Now, redcarpet's parser will call a number of hook, depending on what has been found
 #  in the given lilp file. These hooks can be either `header`, `paragraph`, `block_code`
-#  or other. Here is the formal specification: 
+#  or other. Here is the formal specification:
 #    def preprocess(full_document)
 #      @macro = {}
 #      full_document
 #    end
-#  
+#
 #    def header(text, header_level)
 #      if header_level == 3
 #        @macro[$1.to_sym] if text =~ /Call\: (.*)/
 #      end
 #    end
-#  
+#
 #    def paragraph(text)
 #      text += "\n"
 #      text.gsub(/^/, COMMENT_SIGN)
 #    end
-#  
+#
 #    def block_code(code, language)
 #      if @define_macro and @current_macro
 #        @macro[@current_macro] = code += "\n"
@@ -43,19 +43,19 @@
 #        code += "\n"
 #      end
 #    end
-#  
+#
 #    def hrule()
 #      @define_macro  = ( not @define_macro )
 #      @current_macro = nil if @define_macro
 #    end
-#  
+#
 #    def emphasis(text)
 #      @current_macro = text.to_sym if @define_macro
 #      nil
 #    end
-#  
+#
 #  end
-#  
+#
 #  The code above lists all the rules our render will live by. If there is anything to
 #  change in our render, it's in this part of the code.
 #  To a regular user, lilp is only a command he can invoke from the terminal. In order
@@ -67,16 +67,16 @@
 #  _The option parser_
 #  class Option
 #    attr_reader :files, :params
-#  
+#
 #    def initialize( args )
 #      @params = {}
 #      @parser = OptionParser.new
 #      @args   = args
-#  
+#
 #      @parser.banner = "Usage: lilp file_name.pl [other_file.pl] [-o output_dir]"
 #      @parser.on("-o", "--output D", String, "Output directory") { |val| @params[:output] = File.join('.', "#{val}") }
 #    end
-#  
+#
 #    def parse
 #      begin
 #        @files = @parser.parse(@args)
@@ -96,7 +96,7 @@
 #      end
 #    end
 #  end
-#  
+#
 #  We have a lilp render class, an option class that takes care of the command line
 #  options, now we need a way to tie the to together.
 #  To do this, let's create a third object. The class will be "Runner". It's goal
@@ -104,18 +104,18 @@
 #  the command line.
 #  _Runner class_
 #  class Runner
-#  
+#
 #    def run( params, files_path )
 #      lilp_parser = Redcarpet::Markdown.new(LiterateRender, :fenced_code_blocks => true)
-#  
+#
 #      files_path.each do |file_path|
 #        puts "#{file_path}: "
-#  
+#
 #        if File.extname( file_path ) != '.md'
 #          puts 'Skipping (file must have a .lp extension)'
 #          next
 #        end
-#  
+#
 #        output_path = String.new
 #        if params[:output]
 #          # Creates the output directory if it doesn't exist
@@ -125,32 +125,32 @@
 #            puts "Creating folder #{params[:output]}"
 #            Dir.mkdir(params[:output])
 #          end
-#  
+#
 #          file_name   = File.basename(file_path).chomp( File.extname(file_path) )
 #          output_path = File.join(params[:output], file_name)
 #        else
 #          output_path = file_path.chomp( File.extname(file_path) )
 #        end
-#  
+#
 #        begin
 #          file = File.open( file_path, 'r' )
 #          out  = File.open( output_path, 'w' )
-#  
+#
 #          out.write( lilp_parser.render( file.read ) )
-#  
+#
 #          out.close
 #          file.close
-#  
+#
 #          puts "Wrote #{output_path}"
-#  
+#
 #        rescue
 #          puts "Error while parsing file '#{file_path}': #{$!}"
 #        end
 #      end
-#  
+#
 #    end
 #  end
-#  
+#
 #  Now, the last thing we need to do is to attach each of the parts in the correct order, under
 #  the Lilp module.
 module Lilp
@@ -236,7 +236,7 @@ class Runner
       puts "#{file_path}: "
 
       if File.extname( file_path ) != '.md'
-        puts 'Skipping (file must have a .lp extension)'
+        puts 'Skipping (file must have a .md extension)'
         next
       end
 
