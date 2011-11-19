@@ -3,8 +3,7 @@ Lightweight Literate programming
 
 lilp is a preprocessor that allows you to write literate programming code using the Markdown syntax.
 
-It is an experiment and shouldn't be used for any serious matter. Or
-should it?!
+lilp extracts the code from your markdown files.
 
 ## How it works
 
@@ -17,14 +16,25 @@ puts "code inside code blocks will be extracted, while the rest will
 
 Everything but code blocks will be transformed as comments.
 
-# Compiling
-lilp comes with a command line tool that takes as an input file names, and a "-o" option to specify an output directory.
-
-If your files are under the `lib` directory, and you want to compile them into the `tangled` directory, then do:
+## Installation
 
 ~~~~
-lilp lib/* -o tangled/
+gem install lilp
 ~~~~
+
+## Usage
+To run lilp against a markdown file, use the `lilp` command like this:
+
+~~~~
+lilp file_name.rb.md -o output_dir/
+~~~~
+
+This will extract the code from `file_name.rb.md`, and put it in `output_dir/file_name.rb`.
+
+Your markdown files have to be named '.[language_extension].md'
+
+## Example
+https://github.com/mikaa123/lilplateform
 
 ## License
 
